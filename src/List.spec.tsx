@@ -1,10 +1,23 @@
 import React from 'react'
-import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import { render, waitFor, waitForElementToBeRemoved, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import List from './components/List'
 
+const setup = () => {
+  
+
+  return {
+    typeInput,
+    click
+  }
+}
+
+const typeInput = () => userEvent.type(screen.getByPlaceholderText(/new item/i), 'Novo')
+const click = () => userEvent.click(screen.getByRole('button', { name: /adicionar/i }))
+
 describe('List component', () => {
+
   it('should render list items',async () => {
     const { getByText } = render(<List initialItems={['Anderson', 'Diego', 'Pedro']} />)
 
@@ -18,8 +31,8 @@ describe('List component', () => {
 
     screen.debug() // show html of element
 
-    userEvent.type(screen.getByPlaceholderText(/new item/i), 'Novo')
-    userEvent.click(screen.getByRole('button', { name: /adicionar/i }))
+    typeInput()
+    click()
 
     screen.debug()
 
@@ -31,8 +44,8 @@ describe('List component', () => {
 
     screen.debug() // show html of element
 
-    userEvent.type(screen.getByPlaceholderText(/new item/i), 'Novo')
-    userEvent.click(screen.getByRole('button', { name: /adicionar/i }))
+    typeInput()
+    click()
 
     await waitFor(() => {
       expect(screen.getByText('Novo')).toBeInTheDocument()
