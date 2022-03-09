@@ -4,15 +4,6 @@ import userEvent from '@testing-library/user-event'
 
 import List from './components/List'
 
-const setup = () => {
-  
-
-  return {
-    typeInput,
-    click
-  }
-}
-
 const typeInput = () => userEvent.type(screen.getByPlaceholderText(/new item/i), 'Novo')
 const click = () => userEvent.click(screen.getByRole('button', { name: /adicionar/i }))
 
