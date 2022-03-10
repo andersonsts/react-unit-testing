@@ -1,6 +1,6 @@
 import React from 'react'
-import List from "./components/List";
+import Users from './components/Users';
 
 export default function App() {
-  return <List initialItems={['Anderson', 'Diego', 'Pedro']} />
+  return <Users />
 }
